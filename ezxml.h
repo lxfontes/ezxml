@@ -28,7 +28,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include "ezxml_cfg.h"
+
+#ifndef EZXML_NOT_PARSE_FILE
 #include <fcntl.h>
+#endif //EZXML_NOT_PARSE_FILE
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,6 +63,7 @@ struct ezxml {
 // pass in the copy. Returns NULL on failure.
 ezxml_t ezxml_parse_str(char *s, size_t len);
 
+#ifndef EZXML_NOT_PARSE_FILE
 // A wrapper for ezxml_parse_str() that accepts a file descriptor. First
 // attempts to mem map the file. Failing that, reads the file into memory.
 // Returns NULL on failure.
@@ -66,11 +71,12 @@ ezxml_t ezxml_parse_fd(int fd);
 
 // a wrapper for ezxml_parse_fd() that accepts a file name
 ezxml_t ezxml_parse_file(const char *file);
-    
+
 // Wrapper for ezxml_parse_str() that accepts a file stream. Reads the entire
 // stream into memory and then parses it. For xml files, use ezxml_parse_file()
 // or ezxml_parse_fd()
 ezxml_t ezxml_parse_fp(FILE *fp);
+#endif //EZXML_NOT_PARSE_FILE
 
 // returns the first child tag (one level deeper) with the given name or NULL
 // if not found
