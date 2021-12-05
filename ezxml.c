@@ -22,6 +22,10 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#ifdef _WIN32
+#define EZXML_NOMMAP
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdarg.h>
